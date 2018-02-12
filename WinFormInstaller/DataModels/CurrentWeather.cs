@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WinFormInstaller.DataModels
 {
+    /// <summary>
+    /// Represents the total JSON object returned
+    /// </summary>
     public class CurrentWeather
     {
         public Coordinates coord { get; set; }
@@ -48,8 +51,12 @@ namespace WinFormInstaller.DataModels
 
     //}
     //ERROR: Cannot use this class because data is enclosed within a JSON array, thus
-    //not making the object elligible for class conversion
+    //making the object not elligible for class conversion
 
+
+    ///<summary>
+    /// Represents numeric data associated with weather conditions
+    /// </summary>
     public class Main {
 
         public double temp { get; set; }
@@ -60,6 +67,9 @@ namespace WinFormInstaller.DataModels
 
     }
 
+    /// <summary>
+    /// Represents numeric data associated with wind conditions
+    /// </summary>
     public class Wind {
 
         public double speed { get; set; }

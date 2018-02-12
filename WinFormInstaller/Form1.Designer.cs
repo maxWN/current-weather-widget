@@ -51,6 +51,7 @@
             // 
             // submitLocation
             // 
+            this.submitLocation.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.submitLocation.Location = new System.Drawing.Point(638, 333);
             this.submitLocation.Name = "submitLocation";
             this.submitLocation.Size = new System.Drawing.Size(75, 23);
@@ -97,6 +98,8 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.submitLocation);
             this.Controls.Add(this.pictureBox1);
+            this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Current Weather App";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

@@ -20,3 +20,7 @@ deserialize from a JSON array.\r\nPath 'weather', line 1, position 46."}
 	System.Exception
 
 "Unexpected character encountered while parsing value: {. Path 'weather', line 1, position 47."
+
+
+*Add attribution for creator of the .ico file used:
+http://www.iconarchive.com/show/flat-jewels-icons-by-pixelkit/Weather-icon.html

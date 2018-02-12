@@ -37,8 +37,16 @@ namespace WinFormInstaller
 
         }
 
+        /// <summary>
+        /// Configure List with API data
+        /// </summary>
+        /// <param name="weatherMap"></param>
         public void ConfigureListView(CurrentWeather weatherMap) {
 
+            //create default label, before loading API data
+            label1.Text = "Sunny";
+
+            //define list attributes
             listView1.View = View.Details;
             listView1.LabelEdit = true;
             listView1.AllowColumnReorder = true;
@@ -69,26 +77,29 @@ namespace WinFormInstaller
             }
         }
 
+        /// <summary>
+        /// Populate list with default values if connection is broken
+        /// </summary>
         public void DefaultPopulateListView() {
 
             ListViewItem item1 = new ListViewItem("city name", 0);
             item1.SubItems.Add("severity of rainfall");
-            item1.SubItems.Add("temp");
-            item1.SubItems.Add("wind speed");
+            item1.SubItems.Add("x");
+            item1.SubItems.Add("y");
             //ListViewItem first argument in constructor represents the name of a new column
             ListViewItem item2 = new ListViewItem("item2", 1);
-            item2.SubItems.Add("4");
-            item2.SubItems.Add("5");
-            item2.SubItems.Add("6");
+            item2.SubItems.Add("temp");
+            item2.SubItems.Add("x");
+            item2.SubItems.Add("y");
             ListViewItem item3 = new ListViewItem("item3", 0);
 
             item3.Checked = true;
-            item3.SubItems.Add("7");
-            item3.SubItems.Add("8");
-            item3.SubItems.Add("9");
+            item3.SubItems.Add("wind speed");
+            item3.SubItems.Add("x");
+            item3.SubItems.Add("y");
 
             // Create columns for the items and subitems.
-            // Width of -2 indicates auto-size.
+            // Width of -2 represents auto-size.
             listView1.Columns.Add("Conditions", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Perspiration", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Temperature", -2, HorizontalAlignment.Left);
@@ -99,7 +110,6 @@ namespace WinFormInstaller
 
         private void weather_title(object sender, EventArgs e)
         {
-
         }
 
         private void weather_image(object sender, EventArgs e)
