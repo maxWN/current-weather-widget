@@ -71,6 +71,7 @@ namespace WinFormInstaller
 
         private string BuildParameters(string args) {
 
+            //placeholder URL; service will be established to send it later...
             return "https://www.test.com";
 
         }
