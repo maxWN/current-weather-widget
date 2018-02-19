@@ -34,7 +34,15 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.currentWeatherMenu = new System.Windows.Forms.MenuStrip();
+            this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generalInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chartsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.themeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.accountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.currentWeatherMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -80,12 +88,67 @@
             // 
             // listView1
             // 
+            this.listView1.BackColor = System.Drawing.SystemColors.Info;
             this.listView1.Location = new System.Drawing.Point(24, 63);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(224, 250);
+            this.listView1.Size = new System.Drawing.Size(425, 250);
             this.listView1.TabIndex = 4;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Tile;
+            // 
+            // currentWeatherMenu
+            // 
+            this.currentWeatherMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.currentWeatherMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dataToolStripMenuItem,
+            this.settingsToolStripMenuItem});
+            this.currentWeatherMenu.Location = new System.Drawing.Point(0, 0);
+            this.currentWeatherMenu.Name = "currentWeatherMenu";
+            this.currentWeatherMenu.Size = new System.Drawing.Size(738, 28);
+            this.currentWeatherMenu.TabIndex = 5;
+            this.currentWeatherMenu.Text = "menuStrip1";
+            // 
+            // dataToolStripMenuItem
+            // 
+            this.dataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generalInfoToolStripMenuItem,
+            this.chartsToolStripMenuItem});
+            this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.dataToolStripMenuItem.Text = "Data";
+            // 
+            // generalInfoToolStripMenuItem
+            // 
+            this.generalInfoToolStripMenuItem.Name = "generalInfoToolStripMenuItem";
+            this.generalInfoToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.generalInfoToolStripMenuItem.Text = "General Info";
+            // 
+            // chartsToolStripMenuItem
+            // 
+            this.chartsToolStripMenuItem.Name = "chartsToolStripMenuItem";
+            this.chartsToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.chartsToolStripMenuItem.Text = "Charts";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.themeToolStripMenuItem,
+            this.accountToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // themeToolStripMenuItem
+            // 
+            this.themeToolStripMenuItem.Name = "themeToolStripMenuItem";
+            this.themeToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.themeToolStripMenuItem.Text = "Themes";
+            // 
+            // accountToolStripMenuItem
+            // 
+            this.accountToolStripMenuItem.Name = "accountToolStripMenuItem";
+            this.accountToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.accountToolStripMenuItem.Text = "Account";
             // 
             // Form1
             // 
@@ -98,11 +161,15 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.submitLocation);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.currentWeatherMenu);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.currentWeatherMenu;
             this.Name = "Form1";
             this.Text = "Current Weather App";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.currentWeatherMenu.ResumeLayout(false);
+            this.currentWeatherMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,6 +182,13 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.MenuStrip currentWeatherMenu;
+        private System.Windows.Forms.ToolStripMenuItem dataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generalInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chartsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem themeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem accountToolStripMenuItem;
     }
 }
 
