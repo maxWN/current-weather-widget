@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<WixLocalization Culture="en-us" xmlns="http://wixtoolset.org/schemas/v4/wxl">
-  
-	<String Id="PRODUCT_NAME">Current Weather</String>
-  <String Id="LANGUAGE">1033</String>
-  <String Id="MANUFACTURER">Novo Dev</String>
-  
-</WixLocalization>
