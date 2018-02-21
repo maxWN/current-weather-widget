@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-	<Product Id="*" Name="Installer" Language="1033" Version="1.0.0.0" Manufacturer="-------" UpgradeCode="">
+	<Product Id="*" Name="!(loc.PRODUCT_NAME)" Language="!(loc.LANGUAGE)" Version="1.0.0.0" Manufacturer="!(loc.MANUFACTURER)" UpgradeCode="{08C75A0C-54B5-48D1-B684-9FF693C45153}">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -9,6 +9,14 @@
 		<Feature Id="ProductFeature" Title="Installer" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 		</Feature>
+  
+    <UI>
+      <UIRef Id="WixUI_Mondo"/>
+    </UI>
+    <!--<WixVariable Id="WixUINewIco" Value="Pixelkit-Flat-Jewels-Weather.ico"/>-->
+    <!--<Icon Id="AppIcon.ico" SourceFile="Pixelkit-Flat-Jewels-Weather.ico"/>-->
+  
+  
 	</Product>
 
 	<Fragment>
@@ -21,10 +29,21 @@
 
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			<!-- <Component Id="ProductComponent"> -->
-				<!-- TODO: Insert files, registry keys, and other resources here. -->
-			<!-- </Component> -->
+      
+			 <Component Id="WinFormInstaller.exe" Guid="{66AD172A-85C7-49E4-8865-6DD6C92B1420}"> 
+        <File Id="WinFormInstaller.exe" Name="WinFormInstaller.exe" Source="$(var.WinFormInstaller.TargetPath)" DiskId="1" />
+				 <!--TODO: Insert files, registry keys, and other resources here.-->
+			 </Component>
+       <Component Id="WinFormInstaller.exe.config" Guid="{20F417A3-EC32-470A-AC3E-A6D05960D7A2}"> 
+        <File Id="WinFormInstaller.exe.config" Name="WinFormInstaller.exe.config" Source="$(var.WinFormInstaller.TargetDir)\WinFormInstaller.exe.config" DiskId="1" />
+				 <!--TODO: Insert files, registry keys, and other resources here.-->
+			 </Component>
+      
+       <!-- 3rd Party Libraries -->
+       <Component Id="Newtonsoft.Json.dll" Guid="{2F2EDB36-A056-4883-9F8C-0B5C3126CC5D}">
+         <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll"  Source="$(var.WinFormInstaller.TargetDir)\Newtonsoft.Json.dll" DiskId="1" ></File>
+       </Component>
+    
 		</ComponentGroup>
 	</Fragment>
 </Wix>

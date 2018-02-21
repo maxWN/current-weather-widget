@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="assets\images\Pixelkit-Flat-Jewels-Weather.ico" />
     <Content Include="assets\images\Status-weather-clear-icon.png" />
     <Content Include="assets\images\Status-weather-clouds-icon.png" />
     <Content Include="assets\images\Status-weather-few-clouds-icon.png" />
