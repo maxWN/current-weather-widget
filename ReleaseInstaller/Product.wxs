@@ -8,6 +8,7 @@
 
     <Feature Id="ProductFeature" Title="Installer" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="UninstallComponents" />
     </Feature>
 
     <UI>
@@ -32,22 +33,24 @@
   </Fragment>
 
   <Fragment>
-    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+    <ComponentGroup Id="ProductComponents"  Directory="INSTALLFOLDER">
 
       <Component Id="WinFormInstaller.exe" Guid="{66AD172A-85C7-49E4-8865-6DD6C92B1420}">
         <File Id="WinFormInstaller.exe" Name="WinFormInstaller.exe" Source="$(var.WinFormInstaller.TargetPath)" DiskId="1">
-        <Shortcut Id="CurrentWeatherReader"
-          Directory="CurrentWeatherReaderApp"
-          Name="CurrentWeatherApp"
-          Description="Application for getting current weather predictions"
-          WorkingDirectory="INSTALLFOLDER"
-          Advertise="yes"
-          Icon="AppIcon.ico"/>
+          <Shortcut Id="CurrentWeatherReader"
+            Directory="CurrentWeatherReaderApp"
+            Name="CurrentWeatherApp"
+            Description="Application for getting current weather predictions"
+            WorkingDirectory="INSTALLFOLDER"
+            Advertise="yes"
+            Icon="AppIcon.ico"/>
         </File>
         <RemoveFolder Id="DeleteCurrentWeatherReader"
               Directory="CurrentWeatherReaderApp"
               On="uninstall" />
       </Component>
+
+
       <Component Id="WinFormInstaller.exe.config" Guid="{20F417A3-EC32-470A-AC3E-A6D05960D7A2}">
         <File Id="WinFormInstaller.exe.config" Name="WinFormInstaller.exe.config" Source="$(var.WinFormInstaller.TargetDir)\WinFormInstaller.exe.config" DiskId="1" />
         <!--TODO: Insert files, registry keys, and other resources here.-->
@@ -56,6 +59,20 @@
       <!-- 3rd Party Libraries -->
       <Component Id="Newtonsoft.Json.dll" Guid="{2F2EDB36-A056-4883-9F8C-0B5C3126CC5D}">
         <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll"  Source="$(var.WinFormInstaller.TargetDir)\Newtonsoft.Json.dll" DiskId="1" ></File>
+      </Component>
+
+    </ComponentGroup>    
+    
+    <ComponentGroup Id="UninstallComponents">
+
+      <Component Id="UninstallShortcut" Guid="*" Directory="CurrentWeatherReaderApp">
+        <Shortcut Id="UninstallCurrentWeatherReaderApp"
+                  Name="Uninstall CurrentWeatherReader"
+                  Description="Uninstalls the CurrentWeatherReader Application"
+                  Target="[System64Folder]msiexec.exe"
+                  Arguments="/x [ProductCode]" />
+        <RegistryValue Root="HKCU" Key="NovoDev\WeatherReader\CurrentWeatherReaderApp" Name="installed" Type="integer" Value="1"
+                       KeyPath="yes" />
       </Component>
 
     </ComponentGroup>

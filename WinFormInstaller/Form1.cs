@@ -15,6 +15,7 @@ namespace WinFormInstaller
     {
 
         private WeatherMap weatherMap;
+        private CurrentWeather formData;
 
         public Form1()
         {
@@ -27,7 +28,7 @@ namespace WinFormInstaller
         private void InitializeFormData() {
 
             weatherMap = new WeatherMap();
-            CurrentWeather formData = null;
+            formData = null;
             //weatherMap.GetCurrentWeather("nowhere");
             //if (weatherMap != null)
             //{
@@ -124,7 +125,26 @@ namespace WinFormInstaller
 
         private void submitLocation_Click(object sender, EventArgs e)
         {
+            #region Local Variables 
 
+                string newLocation;
+            
+            #endregion Local Variables
+
+            if (textBox1.Text != null) {
+
+                //update API request with location
+                newLocation = textBox1.Text;
+                weatherMap = new WeatherMap();
+                formData = null;
+                weatherMap.GetCurrentWeather(newLocation);
+                if (weatherMap != null)
+                {
+                    ConfigureListView(formData);
+                }
+                ConfigureListView(formData);
+
+            }
         }
     }
 }

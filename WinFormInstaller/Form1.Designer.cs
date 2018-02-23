@@ -47,12 +47,14 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
             this.pictureBox1.Location = new System.Drawing.Point(474, 63);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(239, 250);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.weather_image);
@@ -120,13 +122,13 @@
             // generalInfoToolStripMenuItem
             // 
             this.generalInfoToolStripMenuItem.Name = "generalInfoToolStripMenuItem";
-            this.generalInfoToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.generalInfoToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.generalInfoToolStripMenuItem.Text = "General Info";
             // 
             // chartsToolStripMenuItem
             // 
             this.chartsToolStripMenuItem.Name = "chartsToolStripMenuItem";
-            this.chartsToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.chartsToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.chartsToolStripMenuItem.Text = "Charts";
             // 
             // settingsToolStripMenuItem
@@ -141,13 +143,13 @@
             // themeToolStripMenuItem
             // 
             this.themeToolStripMenuItem.Name = "themeToolStripMenuItem";
-            this.themeToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.themeToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
             this.themeToolStripMenuItem.Text = "Themes";
             // 
             // accountToolStripMenuItem
             // 
             this.accountToolStripMenuItem.Name = "accountToolStripMenuItem";
-            this.accountToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.accountToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
             this.accountToolStripMenuItem.Text = "Account";
             // 
             // Form1

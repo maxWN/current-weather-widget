@@ -11,6 +11,7 @@ namespace WinFormInstaller
 {
     public class WeatherMap
     {
+        private string paritalURL = "https://api.openweathermap.org/data/2.5/weather";
 
         #region Private Methods
 
@@ -71,8 +72,19 @@ namespace WinFormInstaller
 
         private string BuildParameters(string args) {
 
-            //placeholder URL; service will be established to send it later...
-            return "https://www.test.com";
+            string secretKey="";
+
+            //Create service that first requires user to sign up to site
+            //then enter in their API key...            
+            if (args != null)
+            {
+                paritalURL += string.Format("?q={0} {1}", args, secretKey);
+            }
+            else {
+                throw new ArgumentNullException("BuildParameters() Error: Invalid argument was given.");
+            }
+
+            return paritalURL;
 
         }
 
