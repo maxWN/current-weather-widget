@@ -83,25 +83,25 @@ namespace WinFormInstaller
         /// </summary>
         public void DefaultPopulateListView() {
 
-            ListViewItem item1 = new ListViewItem("city name", 0);
+            ListViewItem item1 = new ListViewItem("city name 1", 0);
             item1.SubItems.Add("severity of rainfall");
-            item1.SubItems.Add("x");
-            item1.SubItems.Add("y");
+            item1.SubItems.Add("temp");
+            item1.SubItems.Add("wind speed");
             //ListViewItem first argument in constructor represents the name of a new column
-            ListViewItem item2 = new ListViewItem("item2", 1);
-            item2.SubItems.Add("temp");
+            ListViewItem item2 = new ListViewItem("city name 2", 1);
+            item2.SubItems.Add("z");
             item2.SubItems.Add("x");
             item2.SubItems.Add("y");
-            ListViewItem item3 = new ListViewItem("item3", 0);
+            ListViewItem item3 = new ListViewItem("city name 3", 0);
 
             item3.Checked = true;
-            item3.SubItems.Add("wind speed");
+            item3.SubItems.Add("z");
             item3.SubItems.Add("x");
             item3.SubItems.Add("y");
 
             // Create columns for the items and subitems.
             // Width of -2 represents auto-size.
-            listView1.Columns.Add("Conditions", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Location", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Perspiration", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Temperature", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Wind", -2, HorizontalAlignment.Center);

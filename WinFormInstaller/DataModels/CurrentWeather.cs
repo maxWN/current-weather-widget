@@ -77,12 +77,18 @@ namespace WinFormInstaller.DataModels
 
     }
 
+    /// <summary>
+    /// Represents numeric data regarding cloud formations
+    /// </summary>
     public class Clouds {
 
         public int all { get; set; }
 
     }
 
+    /// <summary>
+    /// Represents data associated with geography, and solar position
+    /// </summary>
     public class Sys
     {
 
