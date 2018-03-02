@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -72,13 +73,12 @@ namespace WinFormInstaller
 
         private string BuildParameters(string args) {
 
-            string secretKey="";
+            string secretKey= "";
 
             //Create service that first requires user to sign up to site
             //then enter in their API key...            
-            if (args != null)
-            {
-                paritalURL += string.Format("?q={0} {1}", args, secretKey);
+            if (args != null) {
+                paritalURL += string.Format("?q={0}{1}", args, secretKey);
             }
             else {
                 throw new ArgumentNullException("BuildParameters() Error: Invalid argument was given.");
@@ -91,9 +91,19 @@ namespace WinFormInstaller
         private async Task<T> GetOpenWeatherMapResponse<T>(string args) where T: class {
 
             T retVal = null;
+            try
+            {
+                if (args != null)
+                {
 
-            retVal = await GetAsync<T>(args);
+                    retVal = await GetAsync<T>(args);
 
+                }
+            }
+            catch (ArgumentException ex) {
+                Log.Information("The following error, " + ex + ", occurred in GetOpenWeatherMapResonse() at" + DateTime.Now);
+                throw;
+            }
             return retVal;
 
         }
@@ -109,6 +119,7 @@ namespace WinFormInstaller
             string uriPath;
 
             if (location != null) {
+
                 uriPath = BuildParameters(location);
 
                 Task.Run(async () =>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,22 +20,30 @@ namespace WinFormInstaller
 
         public Form1()
         {
+            Log.Logger = new LoggerConfiguration().WriteTo.File("error-log.txt").CreateLogger();
             InitializeComponent();
             InitializeFormData();
         }
+
         //add icons from this url:
         //http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org.18.html
 
         private void InitializeFormData() {
 
-            weatherMap = new WeatherMap();
-            formData = null;
-            //weatherMap.GetCurrentWeather("nowhere");
-            //if (weatherMap != null)
+            Log.Information("Form initialzed at: " + DateTime.Now);
+
+            //weatherMap = new WeatherMap();
+            //formData = weatherMap.GetCurrentWeather("London,uk");
+            //if (formData != null)
             //{
             //    ConfigureListView(formData);
             //}
-            ConfigureListView(formData);
+            //else {
+            //    throw new ArgumentException("InitializeFormData(): Error occurred - invalid results");
+            //}
+            DefaultPopulateListView();
+
+            Log.Information("Form finished initialization at: " + DateTime.Now);
 
         }
 
@@ -128,8 +137,10 @@ namespace WinFormInstaller
             #region Local Variables 
 
                 string newLocation;
-            
+
             #endregion Local Variables
+
+            #region Events
 
             if (textBox1.Text != null) {
 
@@ -145,6 +156,8 @@ namespace WinFormInstaller
                 ConfigureListView(formData);
 
             }
+
+            #endregion Events
         }
     }
 }
