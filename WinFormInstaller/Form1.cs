@@ -20,7 +20,7 @@ namespace WinFormInstaller
 
         public Form1()
         {
-            Log.Logger = new LoggerConfiguration().WriteTo.File("error-log.txt").CreateLogger();
+            Log.Logger = new LoggerConfiguration().WriteTo.File(path: "error-log.txt").CreateLogger();
             InitializeComponent();
             InitializeFormData();
         }
@@ -32,6 +32,7 @@ namespace WinFormInstaller
 
             Log.Information("Form initialzed at: " + DateTime.Now);
 
+            #region active app functionality
             //weatherMap = new WeatherMap();
             //formData = weatherMap.GetCurrentWeather("London,uk");
             //if (formData != null)
@@ -41,6 +42,9 @@ namespace WinFormInstaller
             //else {
             //    throw new ArgumentException("InitializeFormData(): Error occurred - invalid results");
             //}
+            #endregion active app functionality
+
+            DefaultAppView();
             DefaultPopulateListView();
 
             Log.Information("Form finished initialization at: " + DateTime.Now);
@@ -48,11 +52,9 @@ namespace WinFormInstaller
         }
 
         /// <summary>
-        /// Configure List with API data
+        /// Loads basic app settings/view
         /// </summary>
-        /// <param name="weatherMap"></param>
-        public void ConfigureListView(CurrentWeather weatherMap) {
-
+        public void DefaultAppView() {
             //create default label, before loading API data
             label1.Text = "Sunny";
 
@@ -60,6 +62,14 @@ namespace WinFormInstaller
             listView1.View = View.Details;
             listView1.LabelEdit = true;
             listView1.AllowColumnReorder = true;
+            listView1.GridLines = true;
+        }
+
+        /// <summary>
+        /// Configure List with API data
+        /// </summary>
+        /// <param name="weatherMap"></param>
+        public void ConfigureListView(CurrentWeather weatherMap) {
 
             // Place a check mark next to the item.
             //item1.Checked = true;
