@@ -73,7 +73,7 @@ namespace WinFormInstaller
 
         private string BuildParameters(string args) {
 
-            string secretKey= "&APPID=4b4f2f27adf6e5389d044cf58e8efa13";
+            string secretKey= "";
 
             //Create service that first requires user to sign up to site
             //then enter in their API key...            
