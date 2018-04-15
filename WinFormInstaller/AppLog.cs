@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WinFormInstaller
 {
-    public static class AppLog
+    public class AppLog
     {
         #region private class variables
 
@@ -23,8 +23,9 @@ namespace WinFormInstaller
             errorLog = new LoggerConfiguration().WriteTo.File(path: "error-log.txt").CreateLogger();
         }
 
-        //public static void InformErrors(AppLog errorDetails) {
-        //    errorLog.Write(LogEventLevel.Information, "{@errorDetails}", errorDetails);
-        //}
+        public static void InformErrors(AppLog errorDetails)
+        {
+            errorLog.Write(LogEventLevel.Information, "{@errorDetails}", errorDetails);
+        }
     }
 }

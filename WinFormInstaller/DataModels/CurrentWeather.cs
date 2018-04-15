@@ -42,14 +42,15 @@ namespace WinFormInstaller.DataModels
     /// <summary>
     /// Represents the actual weather conditions of a location
     /// </summary>
-    //public class Weather {
+    public class Weather
+    {
 
-    //    public int id { get; set; }
-    //    public string main { get; set; }
-    //    public string description { get; set; }
-    //    public string icon { get; set; }
+        public int id { get; set; }
+        public string main { get; set; }
+        public string description { get; set; }
+        public string icon { get; set; }
 
-    //}
+    }
     //ERROR: Cannot use this class because data is enclosed within a JSON array, thus
     //making the object not elligible for class conversion
 
