@@ -12,12 +12,8 @@ namespace WinFormInstaller.DataModels
     public class CurrentWeather
     {
         public Coordinates coord { get; set; }
-        //public string[] weather { get; set; }
-
         public Main main { get; set; }
-
         public int visibility { get; set; }
-
         public Wind wind { get; set; }
         public Clouds clouds { get; set; }
         public int dt { get; set; }
@@ -25,6 +21,11 @@ namespace WinFormInstaller.DataModels
         public int id { get; set; }
         public string name { get; set; }
         public int cod { get; set; }
+
+        // does not match actual retrieved data set property name
+        // this is intentional, because it will throw an exception
+        // due to the unknown type contained within the JSON array 
+        public Weather[] primary { get; set; }
 
     }
 

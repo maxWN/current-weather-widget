@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormInstaller.Controllers;
 using WinFormInstaller.DataModels;
 
 namespace WinFormInstaller
@@ -17,20 +18,27 @@ namespace WinFormInstaller
 
         private WeatherMap weatherMap;
         private CurrentWeather formData;
+        private ImageConfigurationController imgConfig;
 
-        public Form1()
+        public Form1(WeatherMap _weatherMap, ImageConfigurationController _imgConfig)
         {
             Log.Logger = new LoggerConfiguration().WriteTo.File(path: "error-log.txt").CreateLogger();
+
+            weatherMap = _weatherMap;
+            imgConfig = _imgConfig;
+
             InitializeComponent();
             InitializeFormData();
         }
 
-        //add icons from this url:
-        //http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org.18.html
+        // add icons from this url:
+        // http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org.18.html
 
         private void InitializeFormData() {
 
             Log.Information("Form initialzed at: " + DateTime.Now);
+
+            string defaultLocale = "London";
 
             #region active app functionality
             //weatherMap = new WeatherMap();
@@ -39,13 +47,21 @@ namespace WinFormInstaller
             //{
             //    ConfigureListView(formData);
             //}
-            //else {
+            //else
+            //{
             //    throw new ArgumentException("InitializeFormData(): Error occurred - invalid results");
             //}
             #endregion active app functionality
 
             DefaultAppView();
-            DefaultPopulateListView();
+
+            // TODO: Remove all unecessary default/initial app behavior
+            // Remove unecessary comments
+            // Relocate distinct features to controller classes
+
+            //DefaultPopulateListView();
+            formData = weatherMap.GetCurrentWeather(defaultLocale);
+            ConfigureListView(formData);
 
             Log.Information("Form finished initialization at: " + DateTime.Now);
 
@@ -56,7 +72,7 @@ namespace WinFormInstaller
         /// </summary>
         public void DefaultAppView() {
             //create default label, before loading API data
-            label1.Text = "Sunny";
+            //label1.Text = "Sunny";
 
             //define list attributes
             listView1.View = View.Details;
@@ -75,6 +91,9 @@ namespace WinFormInstaller
             //item1.Checked = true;
             if (weatherMap != null)
             {
+                label1.Text = weatherMap.primary[0].main;
+                imgConfig.SetWeatherImage(this, label1.Text);
+
                 // Create three items and three sets of subitems for each item.
                 ListViewItem item1 = new ListViewItem(weatherMap.name, 0);
                 item1.SubItems.Add(weatherMap.clouds.all.ToString());
@@ -88,11 +107,11 @@ namespace WinFormInstaller
                 listView1.Columns.Add("Temperature", -2, HorizontalAlignment.Left);
                 listView1.Columns.Add("Wind", -2, HorizontalAlignment.Center);
 
-                //Add the items to the ListView.
+                // Add the items to the ListView.
                 listView1.Items.AddRange(new ListViewItem[] { item1 });
             }
             else {
-                //if no data was found, or err occurred, populate list with dummy data
+                // if no data was found, or err occurred, populate list with dummy data
                 DefaultPopulateListView();
             }
         }
@@ -142,32 +161,42 @@ namespace WinFormInstaller
 
         }
 
+        /// <summary>
+        /// Submit location to obtain weather data
+        /// </summary>=
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void submitLocation_Click(object sender, EventArgs e)
         {
             #region Local Variables 
 
-                string newLocation;
+            string newLocation;
 
             #endregion Local Variables
 
-            #region Events
+            #region Actions
 
-            if (textBox1.Text != null) {
-
-                //update API request with location
-                newLocation = textBox1.Text;
-                weatherMap = new WeatherMap();
-                formData = null;
-                weatherMap.GetCurrentWeather(newLocation);
-                if (weatherMap != null)
+            try
+            {
+                if (textBox1.Text != null)
                 {
-                    ConfigureListView(formData);
-                }
-                ConfigureListView(formData);
 
+                    // update API request with location
+                    newLocation = textBox1.Text;
+                    formData = weatherMap.GetCurrentWeather(newLocation);
+                    if (weatherMap != null)
+                    {
+                        ConfigureListView(formData);
+                    }
+
+                }
+            }
+            catch (Exception ex) {
+                Log.Information("The following error, " + ex + ", occurred in submitLocation_Click() at" + DateTime.Now);
+                this.errorMessage.Visible = true;
             }
 
-            #endregion Events
+            #endregion Actions
         }
     }
 }
