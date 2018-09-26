@@ -1,12 +1,5 @@
 ﻿using Serilog;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinFormInstaller.Controllers;
 using WinFormInstaller.DataModels;
@@ -19,6 +12,7 @@ namespace WinFormInstaller
         private WeatherMap weatherMap;
         private CurrentWeather formData;
         private ImageConfigurationController imgConfig;
+        public Boolean developmentMode = false;
 
         public Form1(WeatherMap _weatherMap, ImageConfigurationController _imgConfig)
         {
@@ -40,28 +34,19 @@ namespace WinFormInstaller
 
             string defaultLocale = "London";
 
-            #region active app functionality
-            //weatherMap = new WeatherMap();
-            //formData = weatherMap.GetCurrentWeather("London,uk");
-            //if (formData != null)
-            //{
-            //    ConfigureListView(formData);
-            //}
-            //else
-            //{
-            //    throw new ArgumentException("InitializeFormData(): Error occurred - invalid results");
-            //}
-            #endregion active app functionality
-
             DefaultAppView();
 
             // TODO: Remove all unecessary default/initial app behavior
             // Remove unecessary comments
             // Relocate distinct features to controller classes
+            // Modify SetWeatherImage() method to dynamically change images
 
-            //DefaultPopulateListView();
-            formData = weatherMap.GetCurrentWeather(defaultLocale);
-            ConfigureListView(formData);
+            //DefaultListViewPopulation();
+            if (developmentMode == false)
+            {
+                formData = weatherMap.GetCurrentWeather(defaultLocale);
+                ConfigureListView(formData);
+            }
 
             Log.Information("Form finished initialization at: " + DateTime.Now);
 
@@ -71,14 +56,13 @@ namespace WinFormInstaller
         /// Loads basic app settings/view
         /// </summary>
         public void DefaultAppView() {
-            //create default label, before loading API data
-            //label1.Text = "Sunny";
 
             //define list attributes
             listView1.View = View.Details;
             listView1.LabelEdit = true;
             listView1.AllowColumnReorder = true;
             listView1.GridLines = true;
+
         }
 
         /// <summary>
@@ -111,15 +95,16 @@ namespace WinFormInstaller
                 listView1.Items.AddRange(new ListViewItem[] { item1 });
             }
             else {
-                // if no data was found, or err occurred, populate list with dummy data
-                DefaultPopulateListView();
+                // if no data was found, or error occurred, populate list with dummy data
+                DefaultListViewPopulation();
             }
+
         }
 
         /// <summary>
         /// Populate list with default values if connection is broken
         /// </summary>
-        public void DefaultPopulateListView() {
+        public void DefaultListViewPopulation() {
 
             ListViewItem item1 = new ListViewItem("city name 1", 0);
             item1.SubItems.Add("severity of rainfall");
@@ -147,20 +132,6 @@ namespace WinFormInstaller
 
         }
 
-        private void weather_title(object sender, EventArgs e)
-        {
-        }
-
-        private void weather_image(object sender, EventArgs e)
-        {
-
-        }
-
-        private void weather_location(object sender, EventArgs e)
-        {
-
-        }
-
         /// <summary>
         /// Submit location to obtain weather data
         /// </summary>=
@@ -168,12 +139,6 @@ namespace WinFormInstaller
         /// <param name="e"></param>
         private void submitLocation_Click(object sender, EventArgs e)
         {
-            #region Local Variables 
-
-            string newLocation;
-
-            #endregion Local Variables
-
             #region Actions
 
             try
@@ -182,8 +147,7 @@ namespace WinFormInstaller
                 {
 
                     // update API request with location
-                    newLocation = textBox1.Text;
-                    formData = weatherMap.GetCurrentWeather(newLocation);
+                    formData = weatherMap.GetCurrentWeather(textBox1.Text);
                     if (weatherMap != null)
                     {
                         ConfigureListView(formData);
@@ -198,5 +162,24 @@ namespace WinFormInstaller
 
             #endregion Actions
         }
+
+        /// <summary>
+        /// Sets application mode to either dev mode or display mode
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void setAppMode_Click(object sender, EventArgs e)
+        {
+            developmentMode = !developmentMode;
+            if (developmentMode)
+            {
+                appModeMenuItem.Text = "Development Mode";
+            }
+            else
+            {
+                appModeMenuItem.Text = "Display Mode";
+            }
+        }
+
     }
 }

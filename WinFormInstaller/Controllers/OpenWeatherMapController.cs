@@ -72,15 +72,19 @@ namespace WinFormInstaller
             dynamic retVal = null;
 
             string result = await content.ReadAsStringAsync();
+
             //WeatherMap type = Type.GetType(result);
             //object instance = Activator.CreateInstance(type);
+
             if (result != null) {
                 JObject jobject = JObject.Parse(result);
                 JToken memberName = (JArray)jobject["weather"];
                 retVal = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(result);
                 retVal.primary = memberName.ToObject<List<Weather>>().ToArray();
             }
+
             //return result == null ? null : Newtonsoft.Json.JsonConvert.DeserializeObject<T>(result);
+
             return retVal;
         }
 
@@ -142,7 +146,7 @@ namespace WinFormInstaller
             CurrentWeather retVal = null;
             string uriPath;
 
-            if (location != null)
+            if (location != null && location.Length > 0)
             {
 
                 uriPath = BuildParameters(location);

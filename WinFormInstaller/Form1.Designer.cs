@@ -42,6 +42,7 @@
             this.themeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorMessage = new System.Windows.Forms.Label();
+            this.appModeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.currentWeatherMenu.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +61,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.weather_image);
             // 
             // submitLocation
             // 
@@ -79,7 +79,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 2;
-            this.textBox1.TextChanged += new System.EventHandler(this.weather_location);
             // 
             // label1
             // 
@@ -89,7 +88,6 @@
             this.label1.Size = new System.Drawing.Size(46, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "label1";
-            this.label1.Click += new System.EventHandler(this.weather_title);
             // 
             // listView1
             // 
@@ -138,7 +136,8 @@
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.themeToolStripMenuItem,
-            this.accountToolStripMenuItem});
+            this.accountToolStripMenuItem,
+            this.appModeMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -146,13 +145,13 @@
             // themeToolStripMenuItem
             // 
             this.themeToolStripMenuItem.Name = "themeToolStripMenuItem";
-            this.themeToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
+            this.themeToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.themeToolStripMenuItem.Text = "Themes";
             // 
             // accountToolStripMenuItem
             // 
             this.accountToolStripMenuItem.Name = "accountToolStripMenuItem";
-            this.accountToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
+            this.accountToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.accountToolStripMenuItem.Text = "Account";
             // 
             // errorMessage
@@ -165,6 +164,13 @@
             this.errorMessage.TabIndex = 6;
             this.errorMessage.Text = "Error: Invalid location submitted";
             this.errorMessage.Visible = false;
+            // 
+            // appModeMenuItem
+            // 
+            this.appModeMenuItem.Name = "appModeMenuItem";
+            this.appModeMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.appModeMenuItem.Text = "Display Mode";
+            this.appModeMenuItem.Click += new System.EventHandler(this.setAppMode_Click);
             // 
             // Form1
             // 
@@ -207,6 +213,7 @@
         private System.Windows.Forms.ToolStripMenuItem themeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem accountToolStripMenuItem;
         private System.Windows.Forms.Label errorMessage;
+        private System.Windows.Forms.ToolStripMenuItem appModeMenuItem;
     }
 }
 
