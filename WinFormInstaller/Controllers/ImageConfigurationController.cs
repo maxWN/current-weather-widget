@@ -16,9 +16,7 @@ namespace WinFormInstaller.Controllers
         /// </summary>
         /// <param name="weatherState"></param>
         /// <returns></returns>
-        public string SetWeatherImage(Form1 _frm, string weatherState) {
-
-            string retVal = null;
+        public void SetWeatherImage(Form1 _frm, string weatherState) {
 
             if (weatherState != null && _frm != null) {
 
@@ -26,6 +24,9 @@ namespace WinFormInstaller.Controllers
 
                 switch (weatherState)
                 {
+
+                    // icons are all from the following source:
+                    // http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org.18.html
                     case "Rain":
                         frm.pictureBox1.BackgroundImage = Properties.Resources.Status_weather_showers_icon;
                         break;
@@ -56,9 +57,6 @@ namespace WinFormInstaller.Controllers
                 }
 
             }
-
-            return retVal;
-
         }
 
         #endregion public methods

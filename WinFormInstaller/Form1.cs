@@ -12,7 +12,7 @@ namespace WinFormInstaller
         private WeatherMap weatherMap;
         private CurrentWeather formData;
         private ImageConfigurationController imgConfig;
-        public Boolean developmentMode = false;
+        public Boolean developmentMode = true;
 
         public Form1(WeatherMap _weatherMap, ImageConfigurationController _imgConfig)
         {
@@ -25,37 +25,29 @@ namespace WinFormInstaller
             InitializeFormData();
         }
 
-        // add icons from this url:
-        // http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org.18.html
-
         private void InitializeFormData() {
 
             Log.Information("Form initialzed at: " + DateTime.Now);
 
             string defaultLocale = "London";
 
-            DefaultAppView();
-
             // TODO: Remove all unecessary default/initial app behavior
             // Remove unecessary comments
             // Relocate distinct features to controller classes
-            // Modify SetWeatherImage() method to dynamically change images
 
-            //DefaultListViewPopulation();
-            if (developmentMode == false)
-            {
-                formData = weatherMap.GetCurrentWeather(defaultLocale);
-                ConfigureListView(formData);
-            }
+            SetDefaultAppView();
+
+            formData = weatherMap.GetCurrentWeather(defaultLocale);
+            ConfigureListView(formData);
 
             Log.Information("Form finished initialization at: " + DateTime.Now);
 
         }
 
         /// <summary>
-        /// Loads basic app settings/view
+        /// Loads basic app UI
         /// </summary>
-        public void DefaultAppView() {
+        public void SetDefaultAppView() {
 
             //define list attributes
             listView1.View = View.Details;
@@ -71,8 +63,6 @@ namespace WinFormInstaller
         /// <param name="weatherMap"></param>
         public void ConfigureListView(CurrentWeather weatherMap) {
 
-            // Place a check mark next to the item.
-            //item1.Checked = true;
             if (weatherMap != null)
             {
                 label1.Text = weatherMap.primary[0].main;
@@ -80,13 +70,13 @@ namespace WinFormInstaller
 
                 // Create three items and three sets of subitems for each item.
                 ListViewItem item1 = new ListViewItem(weatherMap.name, 0);
-                item1.SubItems.Add(weatherMap.clouds.all.ToString());
-                item1.SubItems.Add(weatherMap.main.temp.ToString());
-                item1.SubItems.Add(weatherMap.wind.speed.ToString());
+                item1.SubItems.Add(weatherMap.clouds.all.ToString() + " %");
+                item1.SubItems.Add(weatherMap.main.temp.ToString() + " °C");
+                item1.SubItems.Add(weatherMap.wind.speed.ToString() + " MPH");
 
                 // Create columns for the items and subitems.
                 // Width of -2 indicates auto-size.
-                listView1.Columns.Add("Conditions", -2, HorizontalAlignment.Left);
+                listView1.Columns.Add("Region", -2, HorizontalAlignment.Left);
                 listView1.Columns.Add("Perspiration", -2, HorizontalAlignment.Left);
                 listView1.Columns.Add("Temperature", -2, HorizontalAlignment.Left);
                 listView1.Columns.Add("Wind", -2, HorizontalAlignment.Center);
@@ -132,6 +122,8 @@ namespace WinFormInstaller
 
         }
 
+        #region Events
+
         /// <summary>
         /// Submit location to obtain weather data
         /// </summary>=
@@ -139,28 +131,22 @@ namespace WinFormInstaller
         /// <param name="e"></param>
         private void submitLocation_Click(object sender, EventArgs e)
         {
-            #region Actions
-
             try
             {
                 if (textBox1.Text != null)
                 {
-
                     // update API request with location
                     formData = weatherMap.GetCurrentWeather(textBox1.Text);
                     if (weatherMap != null)
                     {
                         ConfigureListView(formData);
                     }
-
                 }
             }
             catch (Exception ex) {
                 Log.Information("The following error, " + ex + ", occurred in submitLocation_Click() at" + DateTime.Now);
                 this.errorMessage.Visible = true;
             }
-
-            #endregion Actions
         }
 
         /// <summary>
@@ -168,18 +154,18 @@ namespace WinFormInstaller
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void setAppMode_Click(object sender, EventArgs e)
+        private void setDebugMode_Click(object sender, EventArgs e)
         {
             developmentMode = !developmentMode;
             if (developmentMode)
             {
-                appModeMenuItem.Text = "Development Mode";
+                debugModeMenuItem.Text = "Debug Mode";
             }
             else
             {
-                appModeMenuItem.Text = "Display Mode";
+                debugModeMenuItem.Text = "Non Debug Mode";
             }
         }
-
+        #endregion Events
     }
 }

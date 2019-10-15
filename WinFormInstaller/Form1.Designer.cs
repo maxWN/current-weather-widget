@@ -41,8 +41,9 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.themeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.debugModeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorMessage = new System.Windows.Forms.Label();
-            this.appModeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.locationLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.currentWeatherMenu.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +54,6 @@
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Highlight;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(474, 63);
             this.pictureBox1.Name = "pictureBox1";
@@ -65,7 +65,7 @@
             // submitLocation
             // 
             this.submitLocation.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.submitLocation.Location = new System.Drawing.Point(638, 345);
+            this.submitLocation.Location = new System.Drawing.Point(557, 391);
             this.submitLocation.Name = "submitLocation";
             this.submitLocation.Size = new System.Drawing.Size(75, 23);
             this.submitLocation.TabIndex = 1;
@@ -75,7 +75,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(474, 346);
+            this.textBox1.Location = new System.Drawing.Point(613, 348);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 2;
@@ -137,7 +137,7 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.themeToolStripMenuItem,
             this.accountToolStripMenuItem,
-            this.appModeMenuItem});
+            this.debugModeMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -154,6 +154,13 @@
             this.accountToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.accountToolStripMenuItem.Text = "Account";
             // 
+            // debugModeMenuItem
+            // 
+            this.debugModeMenuItem.Name = "debugModeMenuItem";
+            this.debugModeMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.debugModeMenuItem.Text = "Debug Mode";
+            this.debugModeMenuItem.Click += new System.EventHandler(this.setDebugMode_Click);
+            // 
             // errorMessage
             // 
             this.errorMessage.AutoSize = true;
@@ -165,12 +172,14 @@
             this.errorMessage.Text = "Error: Invalid location submitted";
             this.errorMessage.Visible = false;
             // 
-            // appModeMenuItem
+            // locationLabel
             // 
-            this.appModeMenuItem.Name = "appModeMenuItem";
-            this.appModeMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.appModeMenuItem.Text = "Display Mode";
-            this.appModeMenuItem.Click += new System.EventHandler(this.setAppMode_Click);
+            this.locationLabel.AutoSize = true;
+            this.locationLabel.Location = new System.Drawing.Point(475, 351);
+            this.locationLabel.Name = "locationLabel";
+            this.locationLabel.Size = new System.Drawing.Size(117, 17);
+            this.locationLabel.TabIndex = 7;
+            this.locationLabel.Text = "Current Location:";
             // 
             // Form1
             // 
@@ -178,6 +187,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(738, 476);
+            this.Controls.Add(this.locationLabel);
             this.Controls.Add(this.errorMessage);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label1);
@@ -213,7 +223,8 @@
         private System.Windows.Forms.ToolStripMenuItem themeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem accountToolStripMenuItem;
         private System.Windows.Forms.Label errorMessage;
-        private System.Windows.Forms.ToolStripMenuItem appModeMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem debugModeMenuItem;
+        private System.Windows.Forms.Label locationLabel;
     }
 }
 
